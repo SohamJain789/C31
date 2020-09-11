@@ -1,93 +1,96 @@
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World = Matter.World;
 const Bodies = Matter.Bodies;
-const Constraint = Matter.Constraint;
-
-var engine, world;
-var box1, pig1,pig3;
-var backgroundImg,platform;
-var bird, slingshot;
-//Initial gameState when the bird is attached to the slingshot 
-var gameState = "onSling" 
-
-function preload() {
-    backgroundImg = loadImage("sprites/bg.png");
+const Body = Matter.Body;
+var ground1
+var division1,division2,division3,division4;
+var division5,division6,division7,division8;
+var division9,division10,division11,division12;
+var division13,plinko1;
+var plinkos = [];
+var particles = [];
+function preload()
+{
+	
 }
 
-function setup(){
-    var canvas = createCanvas(1200,400);
-    engine = Engine.create();
-    world = engine.world;
+function setup() {
+	createCanvas(480,800);
 
 
-    ground = new Ground(600,height,1200,20);
-    platform = new Ground(150, 305, 300, 170);
+	engine = Engine.create();
+	world = engine.world;
 
-    box1 = new Box(700,320,70,70);
-    box2 = new Box(920,320,70,70);
-    pig1 = new Pig(810, 350);
-    log1 = new Log(810,260,300, PI/2);
+	//Create the Bodies Here.
+    ground1 = new Ground(240,800,480,20);
 
-    box3 = new Box(700,240,70,70);
-    box4 = new Box(920,240,70,70);
-    pig3 = new Pig(810, 220);
+    division1 = new Division(0,800,5,400);
+    division2 = new Division(40,800,5,400);
+    division3 = new Division(80,800,5,400);
+    division4 = new Division(120,800,5,400);
+    division5 = new Division(160,800,5,400);
+    division6 = new Division(200,800,5,400);
+    division7 = new Division(240,800,5,400);
+    division8 = new Division(280,800,5,400);
+    division9 = new Division(320,800,5,400);
+    division10 = new Division(360,800,5,400);
+    division11 = new Division(400,800,5,400);
+    division12 = new Division(440,800,5,400);
+    division13 = new Division(480,800,5,400);
+    
+    plinko1 = new Plinko(200,200)
 
-    log3 =  new Log(810,180,300, PI/2);
-
-    box5 = new Box(810,160,70,70);
-    log4 = new Log(760,120,150, PI/7);
-    log5 = new Log(870,120,150, -PI/7);
-
-    bird = new Bird(200,50);
-
-    //log6 = new Log(230,180,80, PI/2);
-    slingshot = new SlingShot(bird.body,{x:200, y:50});
-}
-
-function draw(){
-    background(backgroundImg);
-    Engine.update(engine);
-    //strokeWeight(4);
-    box1.display();
-    box2.display();
-    ground.display();
-    pig1.display();
-    log1.display();
-
-    box3.display();
-    box4.display();
-    pig3.display();
-    log3.display();
-
-    box5.display();
-    log4.display();
-    log5.display();
-
-    bird.display();
-    platform.display();
-    //log6.display();
-    slingshot.display();    
-}
-
-function mouseDragged(){
-    //The bird should follow the mouse only when the gameState is on sling 
-    if(gameState !== "launched"){
-
-        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+  
 
 
-    }
+    
+	Engine.run(engine);
+  
 }
 
 
-function mouseReleased(){
-    slingshot.fly();
-    //Change the game state when the bird flys and is not attached to the slingshot 
-    gameState = "launched"
+function draw() {
+  rectMode(CENTER);
+  background(0,0,0);
+ for (var j = 40; j<=width; j=j+50){
+
+   plinkos.push(new Plinko(j,75))
+  
+   }
+
+  ground1.display();
+  division1.display();
+  division2.display();
+  division3.display();
+  division4.display();
+  division5.display();
+  division6.display();
+  division7.display();
+  division8.display();
+  division9.display();
+  division10.display();
+  division11.display();
+  division12.display();
+  division13.display();
+
+  plinkos.display();
+
+
+  drawSprites();
+ 
 }
 
-function keyPressed(){
-    if(keyCode === 32){
-      //slingshot.attach(bird.body);
-    }
-}
+  
+ 
+  
+  
+ 
+
+
+
+
+
+
+
+
+
